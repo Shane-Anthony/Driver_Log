@@ -28,16 +28,13 @@
   }
 }
 
-
-/* App.css */
-
 .enter-pin-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: white;
+  height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .logo-container {
@@ -59,19 +56,20 @@
 
 .pin-display {
   display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .pin-dot {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
   border-radius: 50%;
-  background-color: black;
 }
 
+
 .pin-dot.filled {
-  background-color: black;
+  background-color: #000;
 }
 
 .dial-pad {
@@ -96,4 +94,111 @@
 .loading-spinner {
   position: absolute;
   z-index: 1;
+}
+
+/* Styles for Dashboard component */
+.dashboard-container {
+  flex: 1;
+}
+
+.dashboard-header {
+  width: 100%;
+  background-color: #777;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.dashboard-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.welcome-text {
+  font-size: 23px;
+  padding: 40px;
+  color: #fff;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.user-button {
+  background-color: #d9d9d9;
+  width: 40%;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.button {
+  background-color: #d9d9d9;
+  width: 40%;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.button-text {
+  color: #1e321c;
+  font-size: 16px;
+  text-align: center;
+}
+
+.logout-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.admin-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.view-button {
+  background-color: #d9d9d9;
+  width: 88%;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.green-button {
+  background-color: #a8be93;
+}
+
+.logout{
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  align-items: center;
+}
+.logout:hover{
+  font-size: 30px;
 }

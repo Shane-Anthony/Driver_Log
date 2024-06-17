@@ -1,95 +1,99 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,} from 'react-router-dom';
+import { useUser } from '../Components/UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import logo from '../Assets/Images/logo.png';
 
-const Dashboard = ({ location }) => {
+const Dashboard = () => {
   const navigate = useNavigate();
-  // Destructuring driverName and logout function from route params
-  const { driverName, logout, clearPinCode } = location.state;
+  const { user, logoutUser} = useUser();
+  
+  console.log('user: ',user);
 
   // Function to handle user logout
   const handleLogout = () => {
-    clearPinCode();
-    navigate.push('/enter-pin');
+    logoutUser();
+    navigate('/');
   };
 
   // Function to navigate to PickVan screen
   const handleStartJourney = () => {
-    navigate.push('/pick-van', { driverName: driverName }); // Navigate to PickVan screen
+    navigate('/pick-van'); // Navigate to PickVan screen
   };
 
   // Function to navigate to End screen
   const handleEndJourney = () => {
-    navigate.push('/end', { driverName: driverName });
+    navigate('/end');
   };
 
   // Function to navigate to AddVehicle screen
   const handleAddVehicle = () => {
-    navigate.push('/add-vehicle'); // Navigate to AddVehicle screen
+    navigate('/add-vehicle'); // Navigate to AddVehicle screen
   };
 
   // Function to navigate to AddDriver screen
   const handleAddDriver = () => {
-    navigate.push('/add-driver');
+    navigate('/add-driver');
   };
 
   // Function to navigate to RemoveVehicle screen
   const handleDelVehicle = () => {
-    navigate.push('/remove-vehicle');
+    navigate('/remove-vehicle');
   };
 
   // Function to navigate to RemoveDriver screen
   const handleDelDriver = () => {
-    navigate.push('/remove-driver');
+    navigate('/remove-driver');
   };
 
   // Function to navigate to AdminView screen
   const handleAdminView = () => {
-    navigate.push('/admin-view');
+    navigate('/admin-view');
   };
 
   // Check if the user is an admin
-  const isAdmin = driverName === 'Admin';
+  const isAdmin = user && user.driverName === 'Admin';
 
   return (
-    <div style={styles.container}>
+    <div className='dashboard-container'>
        {/* Header Section */}
-      <div style={styles.header}>
-        <img src={logo} style={styles.logo} alt="Logo" />
-        <p style={styles.welcomeText}>Welcome, {driverName}!</p>
+      <div className='dashboard-header'>
+        <img src={logo} className='dashboard-logo' alt="Logo" />
+        <p className='welcome-text'>Welcome, {user}!</p>
       </div>
 
        {/* Button Container */}
-      <div style={styles.buttonContainer}>
-        <button style={[styles.userButton, styles.greenButton]} onClick={handleStartJourney}>
+      <div className='button-container'>
+        <button className='user-button green-button button-text' onClick={handleStartJourney}>
           Start
         </button>
-        <button style={styles.userButton} onClick={handleEndJourney}>
+        <button className='user-button button-text' onClick={handleEndJourney}>
           End
         </button>
       </div>
 
       {/* Logout Button */}
-      <div style={styles.logoutContainer}>
-        <button onClick={handleLogout}>Logout</button>
+      <div className='logout-container'>
+        <button className= 'logout' onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} color="white" /></button>
       </div>
 
       {/* Admin Actions */}
       {isAdmin && (
-        <div style={styles.adminContainer}>
-          <button style={[styles.button, styles.greenButton]} onClick={handleAddVehicle}>
+        <div className='admin-container'>
+          <button className='button green-button button-text' onClick={handleAddVehicle}>
             Add Vehicle
           </button>
-          <button style={styles.button} onClick={handleDelVehicle}>
+          <button className='button button-text' onClick={handleDelVehicle}>
             Remove Vehicle
           </button>
-          <button style={[styles.button, styles.greenButton]} onClick={handleAddDriver}>
+          <button className='button green-button button-text' onClick={handleAddDriver}>
             Add Driver
           </button>
-          <button style={styles.button} onClick={handleDelDriver}>
+          <button className='button button-text' onClick={handleDelDriver}>
             Remove Driver
           </button>
-          <button style={styles.viewButton} onClick={handleAdminView}>
+          <button className='view-button button-text' onClick={handleAdminView}>
             View Data
           </button>
         </div>
@@ -98,91 +102,6 @@ const Dashboard = ({ location }) => {
   );
 };
 
-// Styles for Dashboard component
-const styles = {
-  container: {
-    flex: 1,
-  },
-  header: {
-    width: '100%',
-    backgroundColor: '#777',
-    paddingTop: 50,
-    paddingBottom: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 10,
-  },
-  welcomeText: {
-    fontSize: 23,
-    padding: 40,
-    color: '#fff',
-    textAlign: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 40,
-  },
-  userButton:{
-    backgroundColor: '#D9D9D9', 
-    width: '40%', 
-    height: 120, 
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    borderRadius: 10,
-    textAlign: 'center',
-    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-  },
-  button: {
-    backgroundColor: '#D9D9D9', 
-    width: '40%', 
-    height: 120, 
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    textAlign: 'center',
-    marginVertical: 15,
-    marginHorizontal: 20, 
-    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-  },
-  buttonText: {
-    color: '#1E321C',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  logoutContainer: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
-  },
-  adminContainer: {
-    flexDirection: 'row', 
-    flexWrap: 'wrap', 
-    justifyContent: 'center',
-    marginTop: 15, 
-  },
-  viewButton:{
-    backgroundColor: '#D9D9D9',
-    width: '88%',
-    height: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 15,
-    borderRadius: 10,
-    textAlign: 'center',
-    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-  },
-  greenButton:{
-    backgroundColor: '#A8BE93',
-  },
-};
+
 
 export default Dashboard;
