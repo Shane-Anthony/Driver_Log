@@ -14,9 +14,12 @@ const EnterPin = () => {
   const {user, loginUser} = useUser();
 
   useEffect(() => {
-    // Log the current user state whenever it changes
     console.log('Current user:', user);
-  }, [user]);
+    if (user) {
+      // Redirect to dashboard if user is already logged in
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   
   const clearPinCode = useCallback(() => {

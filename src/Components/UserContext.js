@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
+      // You may want to decode the token and verify its validity here
       setUser({ token });
     }
   }, []);
