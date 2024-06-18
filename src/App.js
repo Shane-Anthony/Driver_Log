@@ -7,6 +7,7 @@ import Dashboard from './Pages/Dashboard';
 import AddDriver from './Pages/AddDriver';
 import AddVehicle from './Pages/AddVehicle';
 import RemoveVehicle from './Pages/RemoveVehicle';
+import RemoveDriver from './Pages/RemoveDriver';
 
 
 const PrivateRoute = ({ element, ...rest }) => {
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/add-driver' element ={<PrivateRoute element={<AddDriver />} />} />
           <Route path='/add-vehicle' element ={<PrivateRoute element={<AddVehicle />} />} />
           <Route path='/remove-vehicle' element={<PrivateRoute element={<RemoveVehicle />} />} />
+          <Route path='/remove-driver' element={<PrivateRoute element={<RemoveDriver />} />} />
 
         </Routes>
         

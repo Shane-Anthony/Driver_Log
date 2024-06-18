@@ -233,6 +233,7 @@
 }
 
 .ad-inputContainer {
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -307,6 +308,7 @@
 }
 
 .av-inputContainer {
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -382,6 +384,7 @@
 }
 
 .rv-inputContainer {
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -419,6 +422,83 @@
 }
 
 .rv-errorMessage {
+  color: white;
+  text-align: center; /* Center align the error message */
+  position: absolute; /* Position the error message absolutely */
+  bottom: 20px; /* Adjust this value to position the message within the box */
+  width: 100%; /* Ensure the error message takes the full width */
+  left: 0; /* Align the message to the left of the container */
+}
+
+/*Remove Driver styles*/
+
+.rd-container {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.rd-square {
+  width: 300px;
+  height: 400px;
+  background-color: #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding: 20px;
+  position: relative;
+}
+
+.rd-title {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.rd-inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.rd-input {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 40px;
+  border: 1px solid gray;
+  background-color: white;
+  padding: 0 10px;
+  border-radius: 10px;
+  width: 90%;
+}
+
+.rd-button {
+  background-color: #D9D9D9;
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+}
+
+.rd-buttonText {
+  color: #1E321C;
+  font-weight: bold;
+  text-align: center;
+}
+
+.rd-errorMessage {
   color: white;
   text-align: center; /* Center align the error message */
   position: absolute; /* Position the error message absolutely */
