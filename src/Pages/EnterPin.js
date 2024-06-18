@@ -11,8 +11,14 @@ const EnterPin = () => {
   const [pinCode, setPinCode] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const {loginUser} = useUser();
+  const {user, loginUser} = useUser();
 
+  useEffect(() => {
+    // Log the current user state whenever it changes
+    console.log('Current user:', user);
+  }, [user]);
+
+  
   const clearPinCode = useCallback(() => {
     setPinCode("");
   }, []);
@@ -27,7 +33,7 @@ const EnterPin = () => {
       body: JSON.stringify({ pincode: enteredPin }),
     })
     .then(response => {
-      console.log("Response received:", response); // Log the response object
+      console.log("Response received:", response);
       if (response.ok) {
         return response.json();
       } else {
@@ -35,12 +41,11 @@ const EnterPin = () => {
       }
     })
     .then(data => {
-      console.log("Response data:", data); // Log the data received from the server
+      console.log("Response data:", data);
       if (data.isValid) {
-        loginUser(data.token);
+        loginUser(data.driverName); // Assuming data.driverName is what you want to set
         alert("Successfully logged in!");
-        console.log (data.driverName);
-        navigate('/dashboard' );
+        navigate('/dashboard');
       } else {
         alert("Invalid pin. Please try again.");
         setPinCode("");
@@ -57,11 +62,11 @@ const EnterPin = () => {
   }, [pinCode, loginUser, navigate]);
 
   useEffect(() => {
-    if (pinCode.length === pinLength) {
+    if (pinCode.length === pinLength && !isSubmitting) {
       setIsSubmitting(true);
       signIn();
     }
-  }, [pinCode, signIn]);
+  }, [pinCode, signIn, isSubmitting]);
 
   const handleButtonClick = useCallback((item) => {
     if (item === "clear") {

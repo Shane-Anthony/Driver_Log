@@ -53,14 +53,14 @@ const Dashboard = () => {
   };
 
   // Check if the user is an admin
-  const isAdmin = user && user.driverName === 'Admin';
+  const isAdmin = user && user.token === 'Admin';
 
   return (
     <div className='dashboard-container'>
        {/* Header Section */}
       <div className='dashboard-header'>
         <img src={logo} className='dashboard-logo' alt="Logo" />
-        <p className='welcome-text'>Welcome, {user}!</p>
+        <p className='welcome-text'>Welcome, {user.token}!</p>
       </div>
 
        {/* Button Container */}
