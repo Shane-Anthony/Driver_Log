@@ -222,6 +222,7 @@
   align-items: center;
   border-radius: 30px;
   padding: 20px;
+  position: relative;
 }
 
 .ad-title {
@@ -265,4 +266,163 @@
   color: #1E321C;
   font-weight: bold;
   text-align: center;
+}
+
+.ad-errorMessage {
+  color: white;
+  text-align: center; /* Center align the error message */
+  position: absolute; /* Position the error message absolutely */
+  bottom: 20px; /* Adjust this value to position the message within the box */
+  width: 100%; /* Ensure the error message takes the full width */
+  left: 0; /* Align the message to the left of the container */
+}
+
+/*Add Vehicle styles*/
+
+.av-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.av-square {
+  width: 300px;
+  height: 400px;
+  background-color: #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding: 20px;
+  position: relative;
+}
+
+.av-title {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.av-inputContainer {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.av-input {
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border: 1px solid gray;
+  background-color: white;
+  padding: 0 10px;
+  border-radius: 10px;
+  width: 90%;
+}
+
+.av-button {
+  background-color: #D9D9D9;
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+}
+
+.av-buttonText {
+  color: #1E321C;
+  font-weight: bold;
+  text-align: center;
+}
+
+.av-errorMessage {
+  color: white;
+  text-align: center; /* Center align the error message */
+  position: absolute; /* Position the error message absolutely */
+  bottom: 20px; /* Adjust this value to position the message within the box */
+  width: 100%; /* Ensure the error message takes the full width */
+  left: 0; /* Align the message to the left of the container */
+}
+
+/*Remove Vehicle styles*/
+
+.rv-container {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.rv-square {
+  width: 300px;
+  height: 400px;
+  background-color: #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding: 20px;
+  position: relative;
+}
+
+.rv-title {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.rv-inputContainer {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.rv-input {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 40px;
+  border: 1px solid gray;
+  background-color: white;
+  padding: 0 10px;
+  border-radius: 10px;
+  width: 90%;
+}
+
+.rv-button {
+  background-color: #D9D9D9;
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+}
+
+.rv-buttonText {
+  color: #1E321C;
+  font-weight: bold;
+  text-align: center;
+}
+
+.rv-errorMessage {
+  color: white;
+  text-align: center; /* Center align the error message */
+  position: absolute; /* Position the error message absolutely */
+  bottom: 20px; /* Adjust this value to position the message within the box */
+  width: 100%; /* Ensure the error message takes the full width */
+  left: 0; /* Align the message to the left of the container */
 }

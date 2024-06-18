@@ -5,6 +5,8 @@ import { UserProvider, useUser } from './Components/UserContext';
 import EnterPin from './Pages/EnterPin';
 import Dashboard from './Pages/Dashboard';
 import AddDriver from './Pages/AddDriver';
+import AddVehicle from './Pages/AddVehicle';
+import RemoveVehicle from './Pages/RemoveVehicle';
 
 
 const PrivateRoute = ({ element, ...rest }) => {
@@ -23,7 +25,9 @@ const App = () => {
           <Route path="/" element={<EnterPin/>} />
           <Route path="/dashboard"  element={<PrivateRoute element={<Dashboard />} />} />
           <Route path='/add-driver' element ={<PrivateRoute element={<AddDriver />} />} />
-        
+          <Route path='/add-vehicle' element ={<PrivateRoute element={<AddVehicle />} />} />
+          <Route path='/remove-vehicle' element={<PrivateRoute element={<RemoveVehicle />} />} />
+
         </Routes>
         
       </UserProvider>

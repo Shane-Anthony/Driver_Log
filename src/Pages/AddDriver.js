@@ -7,6 +7,14 @@ const AddDriver = () => {
 
   const handleAddDriver = async () => {
     try {
+      
+
+      // Check if required fields are empty
+      if (!driverName || !pincode ) {
+        setErrorMessage('Please fill out all required fields');
+        return;
+      }
+
       console.log('Sending request to add a driver.');
 
       // Send data to server
@@ -50,23 +58,26 @@ const AddDriver = () => {
         <div className='ad-inputContainer'>
           <input
             className='ad-input'
-            placeholder="Driver Name"
+            placeholder="Driver Name *"
             value={driverName}
             onChange={(e) => setDriverName(e.target.value)}
+            required
           />
         </div>
         <div className='ad-inputContainer'>
           <input
             className='ad-input'
-            placeholder="Pincode"
+            placeholder="Pincode *"
             value={pincode}
             onChange={handlePincodeChange}
+            required
             type="text" // Use type="text" for compatibility with numeric input filtering
           />
         </div>
         <button className='ad-button' onClick={handleAddDriver}>
           <span className='ad-buttonText'>Add Driver</span>
         </button>
+        {errorMessage && <p className='ad-errorMessage'>{errorMessage}</p>}
       </div>
     </div>
   );
