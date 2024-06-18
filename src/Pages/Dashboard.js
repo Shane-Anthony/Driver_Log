@@ -81,16 +81,16 @@ const Dashboard = () => {
       {/* Admin Actions */}
       {isAdmin && (
         <div className='admin-container'>
-          <button className='button green-button button-text' onClick={handleAddVehicle}>
+          <button className='dash-button green-button button-text' onClick={handleAddVehicle}>
             Add Vehicle
           </button>
-          <button className='button button-text' onClick={handleDelVehicle}>
+          <button className='dash-button button-text' onClick={handleDelVehicle}>
             Remove Vehicle
           </button>
-          <button className='button green-button button-text' onClick={handleAddDriver}>
+          <button className='dash-button green-button button-text' onClick={handleAddDriver}>
             Add Driver
           </button>
-          <button className='button button-text' onClick={handleDelDriver}>
+          <button className='dash-button button-text' onClick={handleDelDriver}>
             Remove Driver
           </button>
           <button className='view-button button-text' onClick={handleAdminView}>

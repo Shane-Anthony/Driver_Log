@@ -4,6 +4,8 @@ import { UserProvider, useUser } from './Components/UserContext';
 
 import EnterPin from './Pages/EnterPin';
 import Dashboard from './Pages/Dashboard';
+import AddDriver from './Pages/AddDriver';
+
 
 const PrivateRoute = ({ element, ...rest }) => {
   const { user } = useUser();
@@ -20,6 +22,7 @@ const App = () => {
 
           <Route path="/" element={<EnterPin/>} />
           <Route path="/dashboard"  element={<PrivateRoute element={<Dashboard />} />} />
+          <Route path='/add-driver' element ={<PrivateRoute element={<AddDriver />} />} />
         
         </Routes>
         
