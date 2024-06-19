@@ -478,6 +478,7 @@
   padding: 0 10px;
   border-radius: 10px;
   width: 90%;
+  appearance: auto;
 }
 
 .rd-button {
@@ -505,4 +506,41 @@
   bottom: 20px; /* Adjust this value to position the message within the box */
   width: 100%; /* Ensure the error message takes the full width */
   left: 0; /* Align the message to the left of the container */
+}
+
+/* Admin View */
+
+.App {
+  text-align: center;
+  margin: auto;
+}
+.geeks {
+  color: green;
+}
+
+.tabs-container {
+  width: 400px;
+  margin: 20px auto;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  background-color: #f1f1f1;
+}
+
+.tab.active {
+  background-color: #ddd;
+}
+
+.tab-content {
+  border: 1px solid #ddd;
+  padding: 10px;
 }
