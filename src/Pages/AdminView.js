@@ -62,11 +62,10 @@ const DailyJourneys = () => {
       <table>
         <thead>
           <tr>
-            <th>Date</th>
+            
             <th>Driver Name</th>
             <th>Start Time</th>
             <th>Vehicle Make</th>
-            <th>Vehicle Model</th>
             <th>Vehicle Reg</th>
             <th>End Time</th>
           </tr>
@@ -74,11 +73,10 @@ const DailyJourneys = () => {
         <tbody>
           {dailyJourneys.map((journey, index) => (
             <tr key={index}>
-              <td>{journey.DATE}</td>
+              
               <td>{journey.DRIVER_NAME}</td>
               <td>{journey.START_TIME}</td>
               <td>{journey.VEHICLE_MAKE}</td>
-              <td>{journey.VEHICLE_MODEL}</td>
               <td>{journey.VEHICLE_REG}</td>
               <td>{journey.END_TIME}</td>
             </tr>
@@ -168,7 +166,6 @@ const WeeklyJourneys = () => {
             <th>Driver Name</th>
             <th>Start Time</th>
             <th>Vehicle Make</th>
-            <th>Vehicle Model</th>
             <th>Vehicle Reg</th>
             <th>End Time</th>
           </tr>
@@ -176,11 +173,10 @@ const WeeklyJourneys = () => {
         <tbody>
           {weeklyJourneys.map((journey, index) => (
             <tr key={index}>
-              <td>{journey.DATE}</td>
+              <td>{formatDate(journey.DATE)}</td>
               <td>{journey.DRIVER_NAME}</td>
               <td>{journey.START_TIME}</td>
               <td>{journey.VEHICLE_MAKE}</td>
-              <td>{journey.VEHICLE_MODEL}</td>
               <td>{journey.VEHICLE_REG}</td>
               <td>{journey.END_TIME}</td>
             </tr>
