@@ -1,73 +1,40 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Tabs from "../Components/Tabs";
 import '../App.css';
 
-const AdminView = () => {
+// DailyJourneys Component
+const DailyJourneys = () => {
   const [dailyJourneys, setDailyJourneys] = useState([]);
-  const [weeklyJourneys, setWeeklyJourneys] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const fetchDailyJourneys = async (date) => {
-    try {
-      const response = await axios.get('http://localhost:3000/dailyjourneys', { params: { date } });
-      setDailyJourneys(response.data);
-    } catch (error) {
-      setErrorMessage('Error fetching daily journeys data');
-      console.error(error);
-    }
-  };
-
-  const fetchWeeklyJourneys = async (startDate, endDate) => {
-    try {
-      const response = await axios.get('http://localhost:3000/weeklyjourneys', { params: { startDate, endDate } });
-      setWeeklyJourneys(response.data);
-    } catch (error) {
-      setErrorMessage('Error fetching weekly journeys data');
-      console.error(error);
-    }
-  };
+  
 
   useEffect(() => {
-    const formattedDate = selectedDate.toISOString().split('T')[0];
-    fetchDailyJourneys(formattedDate);
-  }, [selectedDate]);
+    fetchJourneys(); // Fetch journeys data when component mounts
+  }, [selectedDate]); // Fetch journeys data when selectedDate changes
 
-  useEffect(() => {
-    if (startDate && endDate) {
-      fetchWeeklyJourneys(startDate, endDate);
+  const fetchJourneys = async () => {
+    try {
+      // Format selectedDate for API request
+      const formattedDate = selectedDate.toISOString().split('T')[0];
+
+      // Fetch daily journeys from the server
+      const response = await axios.get(`http://localhost:3000/dailyjourneys?date=${formattedDate}`);
+      if (response.status === 200) {
+        setDailyJourneys(response.data);
+      } else {
+        console.error('Failed to fetch journeys data');
+      }
+    } catch (error) {
+      console.error('Error fetching journeys:', error);
     }
-  }, [startDate, endDate]);
-
-  const getStartOfWeek = (date) => {
-    const day = date.getDay();
-    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(date.setDate(diff));
   };
 
-  const goToPreviousWeek = () => {
-    const previousDate = new Date(selectedDate);
-    previousDate.setDate(previousDate.getDate() - 7);
-    setSelectedDate(previousDate);
-    const startOfWeek = getStartOfWeek(previousDate);
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6);
-    setStartDate(startOfWeek.toISOString().split('T')[0]);
-    setEndDate(endOfWeek.toISOString().split('T')[0]);
-  };
-
-  const goToNextWeek = () => {
-    const nextDate = new Date(selectedDate);
-    nextDate.setDate(nextDate.getDate() + 7);
-    setSelectedDate(nextDate);
-    const startOfWeek = getStartOfWeek(nextDate);
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6);
-    setStartDate(startOfWeek.toISOString().split('T')[0]);
-    setEndDate(endOfWeek.toISOString().split('T')[0]);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB').replace(/\//g, '/');
   };
 
   const goToPreviousDay = () => {
@@ -82,50 +49,160 @@ const AdminView = () => {
     setSelectedDate(nextDate);
   };
 
+
+
+  return (
+    <div>
+      <h2>Daily Journeys</h2>
+      <div className="navigation-bar">
+        <FontAwesomeIcon icon={faArrowLeft} onClick={goToPreviousDay} className="arrow-icon" />
+        <span>{formatDate(selectedDate)}</span>
+        <FontAwesomeIcon icon={faArrowRight} onClick={goToNextDay} className="arrow-icon" />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Driver Name</th>
+            <th>Start Time</th>
+            <th>Vehicle Make</th>
+            <th>Vehicle Model</th>
+            <th>Vehicle Reg</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dailyJourneys.map((journey, index) => (
+            <tr key={index}>
+              <td>{journey.DATE}</td>
+              <td>{journey.DRIVER_NAME}</td>
+              <td>{journey.START_TIME}</td>
+              <td>{journey.VEHICLE_MAKE}</td>
+              <td>{journey.VEHICLE_MODEL}</td>
+              <td>{journey.VEHICLE_REG}</td>
+              <td>{journey.END_TIME}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+// WeeklyJourneys Component
+const WeeklyJourneys = () => {
+  const [weeklyJourneys, setWeeklyJourneys] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  
+
+  useEffect(() => {
+    // Fetch weekly journeys when selectedDate changes
+    fetchWeeklyJourneys();
+  }, [selectedDate]);
+
+
+  const fetchWeeklyJourneys = async () => {
+    try {
+      // Calculate start and end dates for the current week
+      const startOfWeek = getStartOfWeek(selectedDate);
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+      // Format dates for API request
+      const formattedStartDate = startOfWeek.toISOString().split('T')[0];
+      const formattedEndDate = endOfWeek.toISOString().split('T')[0];
+
+      // Fetch weekly journeys from the server
+      const response = await axios.get(`http://localhost:3000/weeklyjourneys?startDate=${formattedStartDate}&endDate=${formattedEndDate}`);
+      if (response.status === 200) {
+        setWeeklyJourneys(response.data);
+      } else {
+        console.error('Failed to fetch journeys data');
+      }
+    } catch (error) {
+      console.error('Error fetching journeys:', error);
+    }
+  };
+
+
+  
+  const getStartOfWeek = (date) => {
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    return new Date(date.setDate(diff));
+  };
+
+  const goToPreviousWeek = () => {
+    const previousDate = new Date(selectedDate);
+    previousDate.setDate(previousDate.getDate() - 7);
+    setSelectedDate(previousDate);
+  };
+
+  const goToNextWeek = () => {
+    const nextDate = new Date(selectedDate);
+    nextDate.setDate(nextDate.getDate() + 7);
+    setSelectedDate(nextDate);
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB').replace(/\//g, '/');
   };
 
+  const startOfWeek = getStartOfWeek(selectedDate);
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+  return (
+    <div>
+      <h2>Weekly Journeys</h2>
+      <div className="navigation-bar">
+        <FontAwesomeIcon icon={faArrowLeft} onClick={goToPreviousWeek} className="arrow-icon" />
+        <span>{`${formatDate(startOfWeek)} - ${formatDate(endOfWeek)}`}</span>
+        <FontAwesomeIcon icon={faArrowRight} onClick={goToNextWeek} className="arrow-icon" />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Driver Name</th>
+            <th>Start Time</th>
+            <th>Vehicle Make</th>
+            <th>Vehicle Model</th>
+            <th>Vehicle Reg</th>
+            <th>End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {weeklyJourneys.map((journey, index) => (
+            <tr key={index}>
+              <td>{journey.DATE}</td>
+              <td>{journey.DRIVER_NAME}</td>
+              <td>{journey.START_TIME}</td>
+              <td>{journey.VEHICLE_MAKE}</td>
+              <td>{journey.VEHICLE_MODEL}</td>
+              <td>{journey.VEHICLE_REG}</td>
+              <td>{journey.END_TIME}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+// AdminView Component
+const AdminView = () => {
+  
   const renderContent = (activeTab) => {
     switch (activeTab) {
       case 0:
         return (
-          <div>
-            <h2>Daily Journeys</h2>
-            <div className="navigation-bar">
-              <button onClick={goToPreviousDay}>Previous Day</button>
-              <span>{formatDate(selectedDate)}</span>
-              <button onClick={goToNextDay}>Next Day</button>
-            </div>
-            {errorMessage && <p>{errorMessage}</p>}
-            <ul>
-              {dailyJourneys.map((journey, index) => (
-                <li key={index}>
-                  {journey.DATE} - {journey.DRIVER_NAME} - {journey.START_TIME} - {journey.VEHICLE_MAKE} - {journey.VEHICLE_MODEL} - {journey.VEHICLE_REG} - {journey.END_TIME}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <DailyJourneys/>
         );
       case 1:
         return (
-          <div>
-            <h2>Weekly Journeys</h2>
-            <div className="navigation-bar">
-              <button onClick={goToPreviousWeek}>Previous Week</button>
-              <span>{`${formatDate(startDate)} - ${formatDate(endDate)}`}</span>
-              <button onClick={goToNextWeek}>Next Week</button>
-            </div>
-            {errorMessage && <p>{errorMessage}</p>}
-            <ul>
-              {weeklyJourneys.map((journey, index) => (
-                <li key={index}>
-                  {journey.DATE} - {journey.DRIVER_NAME} - {journey.START_TIME} - {journey.VEHICLE_MAKE} - {journey.VEHICLE_MODEL} - {journey.VEHICLE_REG} - {journey.END_TIME}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <WeeklyJourneys/>
         );
       default:
         return null;
@@ -133,9 +210,7 @@ const AdminView = () => {
   };
 
   return (
-    <div className="AdminView">
-      <h1 className="geeks">GeeksforGeeks</h1>
-      <h1>React Tabs Example</h1>
+    <div className="AdminView">    
       <Tabs tabs={[{label: "Daily"}, {label: "Weekly"}]} renderContent={renderContent} />
     </div>
   );
