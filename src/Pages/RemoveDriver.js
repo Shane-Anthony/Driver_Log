@@ -4,6 +4,7 @@ const RemoveDriver = () => {
   const [drivers, setDrivers] = useState([]);
   const [selectedDriver, setSelectedDriver] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Fetch the list of drivers when the component mounts
@@ -26,6 +27,8 @@ const RemoveDriver = () => {
       return;
     }
 
+    setLoading(true);
+    
     try {
       // Send DELETE request to the server
       const response = await fetch(`http://localhost:3000/removedriver/${selectedDriver}`, {
@@ -44,6 +47,8 @@ const RemoveDriver = () => {
     } catch (error) {
       console.error('Error removing driver:', error.message);
       setErrorMessage(error.message);
+    } finally {
+      setLoading(false); // Reset loading state regardless of success or failure
     }
   };
 
@@ -56,6 +61,7 @@ const RemoveDriver = () => {
             className='rd-input'
             value={selectedDriver}
             onChange={(e) => setSelectedDriver(e.target.value)}
+            disabled={loading}
             required
           >
             <option value='' disabled>Select a driver</option>
@@ -64,8 +70,8 @@ const RemoveDriver = () => {
             ))}
           </select>
         </div>
-        <button className='rd-button' onClick={handleRemoveDriver}>
-          <span className='rd-buttonText'>Remove Driver</span>
+        <button className='rd-button' onClick={handleRemoveDriver}  disabled={!selectedDriver || loading}>
+          <span className='rd-buttonText'>{loading ? 'Removing...' : 'Remove Driver'}</span>
         </button>
         {errorMessage && <p className='rd-errorMessage'>{errorMessage}</p>}
       </div>

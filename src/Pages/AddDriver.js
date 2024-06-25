@@ -4,6 +4,7 @@ const AddDriver = () => {
   const [driverName, setDriverName] = useState('');
   const [pincode, setPincode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleAddDriver = async () => {
     try {
@@ -14,6 +15,8 @@ const AddDriver = () => {
         setErrorMessage('Please fill out all required fields');
         return;
       }
+      setErrorMessage('');
+      setLoading(true);
 
       console.log('Sending request to add a driver.');
 
@@ -42,6 +45,8 @@ const AddDriver = () => {
     } catch (error) {
       console.error('Error adding driver:', error.message);
       setErrorMessage(error.message);
+    } finally {
+      setLoading(false); // Reset loading state regardless of success or failure
     }
   };
 
@@ -61,6 +66,7 @@ const AddDriver = () => {
             placeholder="Driver Name *"
             value={driverName}
             onChange={(e) => setDriverName(e.target.value)}
+            disabled={loading}
             required
           />
         </div>
@@ -70,12 +76,13 @@ const AddDriver = () => {
             placeholder="Pincode *"
             value={pincode}
             onChange={handlePincodeChange}
+            disabled={loading}
             required
             type="text" // Use type="text" for compatibility with numeric input filtering
           />
         </div>
-        <button className='ad-button' onClick={handleAddDriver}>
-          <span className='ad-buttonText'>Add Driver</span>
+        <button className='ad-button' onClick={handleAddDriver} disabled={loading}>
+          <span className='ad-buttonText'>{loading ? 'Adding...' : 'Add Driver'}</span>
         </button>
         {errorMessage && <p className='ad-errorMessage'>{errorMessage}</p>}
       </div>

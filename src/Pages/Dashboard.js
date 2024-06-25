@@ -3,7 +3,8 @@ import { useNavigate,} from 'react-router-dom';
 import { useUser } from '../Components/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import logo from '../Assets/Images/logo.png';
+
+const logo = require('../Assets/Images/logo.jpg')
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Dashboard = () => {
 
   // Function to navigate to PickVan screen
   const handleStartJourney = () => {
-    navigate('/pick-van'); // Navigate to PickVan screen
+    navigate('/start'); // Navigate to PickVan screen
   };
 
   // Function to navigate to End screen

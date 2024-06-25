@@ -9,6 +9,8 @@ import AddVehicle from './Pages/AddVehicle';
 import RemoveVehicle from './Pages/RemoveVehicle';
 import RemoveDriver from './Pages/RemoveDriver';
 import AdminView from './Pages/AdminView';
+import Start from './Pages/Start';
+import End from './Pages/End';
 
 
 const PrivateRoute = ({ element, ...rest }) => {
@@ -30,8 +32,9 @@ const App = () => {
           <Route path='/add-vehicle' element ={<PrivateRoute element={<AddVehicle />} />} />
           <Route path='/remove-vehicle' element={<PrivateRoute element={<RemoveVehicle />} />} />
           <Route path='/remove-driver' element={<PrivateRoute element={<RemoveDriver />} />} />
-          <Route path='/admin-view' element={<PrivateRoute element={<AdminView/>} />} />
-
+          <Route path='/admin-view' element={<PrivateRoute element={<AdminView />} />} />
+          <Route path='/start' element={<PrivateRoute element={<Start />} />} />
+          <Route path='/end' element={<PrivateRoute element={<End />} />} />
         </Routes>
         
       </UserProvider>
