@@ -622,26 +622,34 @@ td {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 100vh;
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box; 
+  overflow: hidden;
+  position: relative;
 }
 
 .s-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  overflow-y: auto;
+  padding-top: 40px;
 }
 
 .s-scrollview {
-  width: calc(100% - 20px); 
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  justify-content: flex-start;
+  max-height: calc(90vh - 90px);
+ 
+  overflow-y: auto;
 }
 
 
@@ -662,6 +670,13 @@ td {
   font-size: 1rem; 
 }
 
+.s-back{
+  border: none;
+  background-color: transparent;
+  padding-top: 50px;
+  font-size: 2rem;
+}
+
 .s-button:hover {
   background-color: #ccc;
 }
@@ -675,10 +690,10 @@ td {
   color: white;
   font-weight: bold;
   border: none;
-  padding: 20px;
   cursor: pointer;
-  margin-top: 10px;
+  bottom: 30px;
   font-size: 1rem; 
+  position: absolute;
 }
 
 .startbutton:hover {
@@ -690,7 +705,6 @@ td {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 10px;
 }
 
 .s-message {
@@ -705,7 +719,7 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 50%;
   padding: 10px;
   text-align: center; 
 }

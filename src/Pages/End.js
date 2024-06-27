@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate,} from 'react-router-dom';
 import { useUser } from '../Components/UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import '../App.css';
 
 const End = ({}) => {
     const [formattedTime, setFormattedTime] = useState('');
@@ -7,6 +11,7 @@ const End = ({}) => {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [message, setMessage] = useState('');
     const [startTime, setStartTime] = useState('');
+    const navigate = useNavigate();
     const {user} = useUser();
 
     // Function to get the last journey of the current day for the specified driver
@@ -70,6 +75,10 @@ const End = ({}) => {
         fetchLastJourney();
     }, []);
 
+    const handleReturnToDashboard = () => {
+        navigate('/dashboard');
+      };
+
     return (
         <div className="end-container">
           <div className="end-text bold large">{message}</div>
@@ -83,6 +92,11 @@ const End = ({}) => {
           <div className="end-text">{`Driver Name: ${user.token}`}</div>
           <div className="end-text">{`Start Time: ${startTime}`}</div>
           <div className="end-text">{`End Time: ${formattedTime}`}</div>
+
+
+          <button className="s-back" onClick={handleReturnToDashboard}>
+            <FontAwesomeIcon icon={faArrowLeft} /> 
+          </button>
         </div>
     );
 };

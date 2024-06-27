@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate,} from 'react-router-dom';
 import { useUser } from '../Components/UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'; // Assuming you have a CSS file for styling
 
 const Start = () => {
+  const navigate = useNavigate();
   const [vehicles, setVehicles] = useState([]);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [journeyStarted, setJourneyStarted] = useState(false);
@@ -71,6 +75,10 @@ const Start = () => {
       });
   };
 
+  const handleReturnToDashboard = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className="s-container">
       {!journeyStarted ? (
@@ -98,6 +106,9 @@ const Start = () => {
           <div className="s-text bold large">{`Thank you, ${user.token}`}</div>
           <img src="/confirm.png" alt="Confirmation" className={`s-icon ${isIconRotated ? 'rotate-animation' : ''}`} />
           <div>{`Started at ${formattedTime}`}</div>
+          <button className="s-back" onClick={handleReturnToDashboard}>
+            <FontAwesomeIcon icon={faArrowLeft} /> 
+          </button>
         </div>
       )}
     </div>
