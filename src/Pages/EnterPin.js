@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../Components/UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUndo, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'; // Make sure this path is correct
 import logo from '../Assets/Images/logo.png';
 
@@ -104,7 +106,7 @@ const EnterPin = () => {
             disabled={isSubmitting}
             className="dial-pad-button"
           >
-            {item === "del" ? "←" : item === "clear" ? "↻" : item}
+            {item === "del" ? <FontAwesomeIcon icon={faArrowLeft} /> : item === "clear" ? <FontAwesomeIcon icon={faUndo} /> : item}
           </button>
         ))}
       </div>
