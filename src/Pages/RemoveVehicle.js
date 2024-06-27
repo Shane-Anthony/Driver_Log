@@ -13,6 +13,8 @@ const RemoveVehicle = () => {
         return;
       }
         
+      setErrorMessage('');
+
       console.log('Sending request to remove vehicle:', registration);
 
       // Send DELETE request to server
@@ -27,7 +29,7 @@ const RemoveVehicle = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Server Response:', data);
-        alert('Vehicle Removed Successfully'); // Replace with a modal or toast notification
+        setErrorMessage(`Vehicle Successfully Removed`);
         setRegistration('');
       } else {
         const errorData = await response.json();

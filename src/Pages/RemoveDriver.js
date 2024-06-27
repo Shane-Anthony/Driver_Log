@@ -38,7 +38,7 @@ const RemoveDriver = () => {
       });
 
       if (response.ok) {
-        alert('Driver removed successfully');
+        setErrorMessage('User Successfully Removed');
         await fetchDrivers();
         setSelectedDriver('');
       } else {

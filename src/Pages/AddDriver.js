@@ -18,7 +18,7 @@ const AddDriver = () => {
       setErrorMessage('');
       setLoading(true);
 
-      console.log('Sending request to add a driver.');
+      console.log('Sending request to add a user.');
 
       // Send data to server
       const response = await fetch('http://localhost:3000/addDriver', {
@@ -36,14 +36,16 @@ const AddDriver = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Server Response:', data);
-        alert('Driver Added Successfully'); // Replace with a modal or toast notification
+        setErrorMessage(`User (${driverName}) Successfully Added`);
+        setDriverName('');
+        setPincode('');
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to add driver');
+        throw new Error(errorData.error || 'Failed to add User');
       }
 
     } catch (error) {
-      console.error('Error adding driver:', error.message);
+      console.error('Error adding user:', error.message);
       setErrorMessage(error.message);
     } finally {
       setLoading(false); // Reset loading state regardless of success or failure
@@ -59,11 +61,11 @@ const AddDriver = () => {
   return (
     <div className='ad-container'>
       <div className='ad-square'>
-        <h2 className='ad-title'>Add a New Driver</h2>
+        <h2 className='ad-title'>Add a New User</h2>
         <div className='ad-inputContainer'>
           <input
             className='ad-input'
-            placeholder="Driver Name *"
+            placeholder="User's Name *"
             value={driverName}
             onChange={(e) => setDriverName(e.target.value)}
             disabled={loading}
@@ -82,7 +84,7 @@ const AddDriver = () => {
           />
         </div>
         <button className='ad-button' onClick={handleAddDriver} disabled={loading}>
-          <span className='ad-buttonText'>{loading ? 'Adding...' : 'Add Driver'}</span>
+          <span className='ad-buttonText'>{loading ? 'Adding...' : 'Add User'}</span>
         </button>
         {errorMessage && <p className='ad-errorMessage'>{errorMessage}</p>}
       </div>

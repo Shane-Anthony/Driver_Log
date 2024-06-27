@@ -13,6 +13,7 @@ const AddVehicle = () => {
         setErrorMessage('Please fill out all required fields');
         return;
       }
+      setErrorMessage('');
 
       // Send data to server
       const response = await fetch('http://localhost:3000/addVehicle', {
@@ -31,11 +32,12 @@ const AddVehicle = () => {
         if (response.ok) {
             const data = await response.json();
             console.log('Server Response:', data);
-            alert('Vehicle Added Successfully'); // Replace with a modal or toast notification
+            setErrorMessage('Vehicle Added Successfully');
             // Clear input fields after successful submission
             setMake('');
             setModel('');
             setRegistration('');
+            
         } else {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to add vehicle');
