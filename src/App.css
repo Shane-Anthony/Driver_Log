@@ -521,8 +521,9 @@ select.rd-input:focus option {
 .tabs-container {
   flex: 1;
   width: 90%;
-  margin: 20px auto;
+  margin:  20px;
   justify-content: center;
+  align-items: center;
   overflow: hidden; 
 }
 
@@ -535,7 +536,6 @@ select.rd-input:focus option {
 .tab {
   cursor: pointer;
   padding: 10px;
-  margin-right: 10px;
   border: 1px solid #ddd;
   border-bottom: 3px solid transparent; 
   background-color: #f1f1f1;
@@ -596,7 +596,6 @@ td {
 
 .navigation-bar {
   display: flex;
-  justify-content: space-between;
   margin: 20px 0;
   border-bottom-width: 1;
   border-bottom-color: #ddd;
@@ -606,7 +605,7 @@ td {
 }
 
 .navigation-bar button {
-  padding: 10px 20px;
+  padding: 20px 20px;
   background-color: #007bff;
   color: white;
   border: none;

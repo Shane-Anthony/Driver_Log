@@ -53,7 +53,7 @@ const DailyJourneys = () => {
 
   return (
     <div>
-      <h2>Daily Journeys</h2>
+      
       <div className="navigation-bar">
         <FontAwesomeIcon icon={faArrowLeft} onClick={goToPreviousDay} className="arrow-icon" />
         <span>{formatDate(selectedDate)}</span>
@@ -161,7 +161,7 @@ const WeeklyJourneys = () => {
 
   return (
     <div>
-      <h2>Weekly Journeys</h2>
+      
       <div className="navigation-bar">
         <FontAwesomeIcon icon={faArrowLeft} onClick={goToPreviousWeek} className="arrow-icon" />
         <span>{`${formatDate(startOfWeek)} - ${formatDate(endOfWeek)}`}</span>
