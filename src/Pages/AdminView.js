@@ -113,7 +113,11 @@ const WeeklyJourneys = () => {
       // Fetch weekly journeys from the server
       const response = await axios.get(`http://localhost:3000/weeklyjourneys?startDate=${formattedStartDate}&endDate=${formattedEndDate}`);
       if (response.status === 200) {
-        setWeeklyJourneys(response.data);
+        const journeysWithDay = response.data.map(journey => ({
+          ...journey,
+          DAY: getDayofWeek(journey.DATE) // Add day name
+        }));
+        setWeeklyJourneys(journeysWithDay);
       } else {
         console.error('Failed to fetch journeys data');
       }
@@ -122,7 +126,11 @@ const WeeklyJourneys = () => {
     }
   };
 
-
+  const getDayofWeek= dateString => {
+    const date = new Date(dateString);
+    const options = { weekday: 'short' }; 
+    return date.toLocaleDateString('en-GB', options);
+  }
   
   const getStartOfWeek = (date) => {
     const day = date.getDay();
@@ -162,7 +170,7 @@ const WeeklyJourneys = () => {
       <table>
         <thead>
           <tr>
-            <th>Date</th>
+            <th>Day</th>
             <th>Driver Name</th>
             <th>Start Time</th>
             <th>Vehicle Make</th>
@@ -173,7 +181,7 @@ const WeeklyJourneys = () => {
         <tbody>
           {weeklyJourneys.map((journey, index) => (
             <tr key={index}>
-              <td>{formatDate(journey.DATE)}</td>
+              <td>{journey.DAY}</td>
               <td>{journey.DRIVER_NAME}</td>
               <td>{journey.START_TIME}</td>
               <td>{journey.VEHICLE_MAKE}</td>
