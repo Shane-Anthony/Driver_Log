@@ -6,24 +6,26 @@ const RemoveDriver = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Fetch the list of drivers when the component mounts
-    const fetchDrivers = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/drivers');
-        const data = await response.json();
-        setDrivers(data);
-      } catch (error) {
-        console.error('Error fetching drivers:', error);
-      }
-    };
 
+// Fetch the list of drivers when the component mounts
+  const fetchDrivers = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/drivers');
+      const data = await response.json();
+      setDrivers(data);
+    } catch (error) {
+      console.error('Error fetching Users:', error);
+    }
+  };
+
+  useEffect(() => {
+    
     fetchDrivers();
   }, []);
 
   const handleRemoveDriver = async () => {
     if (!selectedDriver) {
-      setErrorMessage('Please select a driver to remove');
+      setErrorMessage('Please select a User to remove');
       return;
     }
 
@@ -37,8 +39,7 @@ const RemoveDriver = () => {
 
       if (response.ok) {
         alert('Driver removed successfully');
-        // Refresh the list of drivers after removal
-        setDrivers(drivers.filter(driver => driver.id !== selectedDriver));
+        await fetchDrivers();
         setSelectedDriver('');
       } else {
         const errorData = await response.json();
@@ -55,7 +56,7 @@ const RemoveDriver = () => {
   return (
     <div className='rd-container'>
       <div className='rd-square'>
-        <h2 className='rd-title'>Remove a Driver</h2>
+        <h2 className='rd-title'>Remove User</h2>
         <div className='rd-inputContainer'>
           <select
             className='rd-input'
@@ -63,15 +64,16 @@ const RemoveDriver = () => {
             onChange={(e) => setSelectedDriver(e.target.value)}
             disabled={loading}
             required
+            maxMenuHeight={20}
           >
-            <option value='' disabled>Select a driver</option>
+            <option value='' disabled>Select a User</option>
             {drivers.map(driver => (
               <option key={driver.id} value={driver.id}>{driver.name}</option>
             ))}
           </select>
         </div>
         <button className='rd-button' onClick={handleRemoveDriver}  disabled={!selectedDriver || loading}>
-          <span className='rd-buttonText'>{loading ? 'Removing...' : 'Remove Driver'}</span>
+          <span className='rd-buttonText'>{loading ? 'Removing...' : 'Remove'}</span>
         </button>
         {errorMessage && <p className='rd-errorMessage'>{errorMessage}</p>}
       </div>

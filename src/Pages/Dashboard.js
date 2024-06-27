@@ -92,7 +92,7 @@ const Dashboard = () => {
             Add Driver
           </button>
           <button className='dash-button button-text' onClick={handleDelDriver}>
-            Remove Driver
+            Remove User
           </button>
           <button className='view-button button-text' onClick={handleAdminView}>
             View Data
