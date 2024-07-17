@@ -16,7 +16,7 @@ app.use(cors());
 
 // Database configuration
 const db = mysql.createConnection({
-  host: '754659.vps-10.com',
+  host: '119.234.205.92.host.secureserver.net',
   port: 3306,
   user: 'puregarden_appmin',
   password: 'Pc911Add3!',

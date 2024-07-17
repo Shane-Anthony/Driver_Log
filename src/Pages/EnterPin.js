@@ -4,7 +4,7 @@ import { useUser } from '../Components/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUndo, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'; // Make sure this path is correct
-import logo from '../Assets/Images/logo.png';
+import logo from '../Assets/Images/logo.jpg';
 
 const dialPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, "clear", 0, "del"];
 const pinLength = 5;

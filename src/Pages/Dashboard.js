@@ -89,7 +89,7 @@ const Dashboard = () => {
             Remove Vehicle
           </button>
           <button className='dash-button green-button button-text' onClick={handleAddDriver}>
-            Add Driver
+            Add User
           </button>
           <button className='dash-button button-text' onClick={handleDelDriver}>
             Remove User
