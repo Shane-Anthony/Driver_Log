@@ -4,6 +4,7 @@ import { useUser } from '../Components/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../App.css';
+import icon from '../Assets/Images/confirm.png';
 
 const End = ({}) => {
     const [formattedTime, setFormattedTime] = useState('');
@@ -13,12 +14,13 @@ const End = ({}) => {
     const [startTime, setStartTime] = useState('');
     const navigate = useNavigate();
     const {user} = useUser();
+    
 
     // Function to get the last journey of the current day for the specified driver
     const fetchLastJourney = async () => {
         try {
         // Make a fetch request to your server to get the last journey of the day
-        const response = await fetch(`http://localhost:3000/lastjourney?driver_name=${user.token}`);
+        const response = await fetch(`https://92.205.234.119:3000/lastjourney?driver_name=${user.token}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -52,7 +54,7 @@ const End = ({}) => {
             driver_name: user.token,
             end_time: currentTime
         };
-        const response = await fetch('http://localhost:3000/updatejourney', {
+        const response = await fetch('https://92.205.234.119:3000/updatejourney', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -84,7 +86,7 @@ const End = ({}) => {
           <div className="end-text bold large">{message}</div>
           {updateSuccess && (
             <img
-              src='/confirm.png'
+              src={icon}
               alt="Confirmation"
               className="end-icon"
             />

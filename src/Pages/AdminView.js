@@ -21,7 +21,7 @@ const DailyJourneys = () => {
       const formattedDate = selectedDate.toISOString().split('T')[0];
 
       // Fetch daily journeys from the server
-      const response = await axios.get(`http://localhost:3000/dailyjourneys?date=${formattedDate}`);
+      const response = await axios.get(`https://92.205.234.119:3000/dailyjourneys?date=${formattedDate}`);
       if (response.status === 200) {
         setDailyJourneys(response.data);
       } else {
@@ -111,7 +111,7 @@ const WeeklyJourneys = () => {
       const formattedEndDate = endOfWeek.toISOString().split('T')[0];
 
       // Fetch weekly journeys from the server
-      const response = await axios.get(`http://localhost:3000/weeklyjourneys?startDate=${formattedStartDate}&endDate=${formattedEndDate}`);
+      const response = await axios.get(`https://92.205.234.119:3000/weeklyjourneys?startDate=${formattedStartDate}&endDate=${formattedEndDate}`);
       if (response.status === 200) {
         const journeysWithDay = response.data.map(journey => ({
           ...journey,

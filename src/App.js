@@ -22,7 +22,7 @@ const PrivateRoute = ({ element, ...rest }) => {
 
 const App = () => {
   return (
-    <Router>
+    <Router basename='/driver-log'>
       <UserProvider>
         <Routes>
 

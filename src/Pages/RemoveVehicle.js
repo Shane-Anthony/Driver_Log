@@ -18,7 +18,7 @@ const RemoveVehicle = () => {
       console.log('Sending request to remove vehicle:', registration);
 
       // Send DELETE request to server
-      const response = await fetch(`http://localhost:3000/removevehicle/${registration}`, {
+      const response = await fetch(`https://92.205.234.119:3000/removevehicle/${registration}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

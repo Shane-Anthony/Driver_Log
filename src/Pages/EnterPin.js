@@ -30,7 +30,7 @@ const EnterPin = () => {
 
   const signIn = useCallback(() => {
     const enteredPin = pinCode;
-    fetch('http://localhost:3000/validate-pin', {
+    fetch('https://92.205.234.119:3000/validate-pin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

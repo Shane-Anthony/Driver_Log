@@ -21,7 +21,7 @@ const AddDriver = () => {
       console.log('Sending request to add a user.');
 
       // Send data to server
-      const response = await fetch('http://localhost:3000/addDriver', {
+      const response = await fetch('https://92.205.234.119:3000/addDriver', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

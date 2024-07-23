@@ -4,6 +4,7 @@ import { useUser } from '../Components/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'; // Assuming you have a CSS file for styling
+const icon = require('../Assets/Images/confirm.png')
 
 const Start = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Start = () => {
     
 
     try {
-      const response = await fetch('http://localhost:3000/vehicles');
+      const response = await fetch('https://92.205.234.119:3000/vehicles');
       const data = await response.json();
       console.log('Fetched vehicle data:', data);
 
@@ -56,7 +57,7 @@ const Start = () => {
       driver_name: user.token
     };
 
-    fetch('http://localhost:3000/startjourney', {
+    fetch('https://92.205.234.119:3000/startjourney', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -104,7 +105,7 @@ const Start = () => {
       ) : (
         <div className="journeystartedcontainer">
           <div className="s-text bold large">{`Thank you, ${user.token}`}</div>
-          <img src="/confirm.png" alt="Confirmation" className={`s-icon ${isIconRotated ? 'rotate-animation' : ''}`} />
+          <img src={icon} alt="Confirmation" className={`s-icon ${isIconRotated ? 'rotate-animation' : ''}`} />
           <div>{`Started at ${formattedTime}`}</div>
           <button className="s-back" onClick={handleReturnToDashboard}>
             <FontAwesomeIcon icon={faArrowLeft} /> 

@@ -10,7 +10,7 @@ const RemoveDriver = () => {
 // Fetch the list of drivers when the component mounts
   const fetchDrivers = async () => {
     try {
-      const response = await fetch('http://localhost:3000/drivers');
+      const response = await fetch('https://92.205.234.119:3000/drivers');
       const data = await response.json();
       setDrivers(data);
     } catch (error) {
@@ -33,7 +33,7 @@ const RemoveDriver = () => {
     
     try {
       // Send DELETE request to the server
-      const response = await fetch(`http://localhost:3000/removedriver/${selectedDriver}`, {
+      const response = await fetch(`https://92.205.234.119:3000/removedriver/${selectedDriver}`, {
         method: 'DELETE',
       });
 
@@ -64,7 +64,7 @@ const RemoveDriver = () => {
             onChange={(e) => setSelectedDriver(e.target.value)}
             disabled={loading}
             required
-            maxMenuHeight={20}
+            maxmenuheight={20}
           >
             <option value='' disabled>Select a User</option>
             {drivers.map(driver => (
