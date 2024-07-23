@@ -16,12 +16,12 @@ const EnterPin = () => {
   const {user, loginUser} = useUser();
 
   useEffect(() => {
-    console.log('Current user:', user);
-    if (user) {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
       // Redirect to dashboard if user is already logged in
       navigate('/dashboard');
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   
   const clearPinCode = useCallback(() => {
@@ -48,6 +48,7 @@ const EnterPin = () => {
     .then(data => {
       console.log("Response data:", data);
       if (data.isValid) {
+        localStorage.setItem('authToken', 'true'); //persist login status
         loginUser(data.driverName); // Assuming data.driverName is what you want to set
         alert("Successfully logged in!");
         navigate('/dashboard');

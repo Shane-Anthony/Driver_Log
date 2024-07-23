@@ -14,6 +14,7 @@ const Dashboard = () => {
 
   // Function to handle user logout
   const handleLogout = () => {
+    localStorage.removeItem('authToken');
     logoutUser();
     navigate('/');
   };
