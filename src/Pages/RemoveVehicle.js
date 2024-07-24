@@ -4,21 +4,21 @@ const RemoveVehicle = () => {
   const [registration, setRegistration] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Function to handle vehicle removal
   const handleRemoveVehicle = async () => {
     try {
-
-        // Check if required fields are empty
+      // Check if required fields are empty
       if (!registration) {
         setErrorMessage('Please fill out all required fields');
         return;
       }
         
-      setErrorMessage('');
+      setErrorMessage(''); // Clear error message
 
       console.log('Sending request to remove vehicle:', registration);
 
       // Send DELETE request to server
-      const response = await fetch(`https://92.205.234.119:3000/removevehicle/${registration}`, {
+      const response = await fetch(`https://service-team.co.uk:8443/removevehicle/${registration}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -27,13 +27,13 @@ const RemoveVehicle = () => {
 
       // Handle response
       if (response.ok) {
-        const data = await response.json();
-        console.log('Server Response:', data);
+        const data = await response.json(); // Parse response as JSON
+        console.log('Server Response:', data); // Log server response
         setErrorMessage(`Vehicle Successfully Removed`);
         setRegistration('');
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to remove vehicle');
+        throw new Error(errorData.error || 'Failed to remove vehicle'); // Throw error with message from server or default message
       }
 
     } catch (error) {

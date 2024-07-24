@@ -20,7 +20,7 @@ const End = ({}) => {
     const fetchLastJourney = async () => {
         try {
         // Make a fetch request to your server to get the last journey of the day
-        const response = await fetch(`https://92.205.234.119:3000/lastjourney?driver_name=${user.token}`);
+        const response = await fetch(`https://service-team.co.uk:8443/lastjourney?driver_name=${user.token}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -54,7 +54,7 @@ const End = ({}) => {
             driver_name: user.token,
             end_time: currentTime
         };
-        const response = await fetch('https://92.205.234.119:3000/updatejourney', {
+        const response = await fetch('https://service-team.co.uk:8443/updatejourney', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'

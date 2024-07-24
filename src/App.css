@@ -125,7 +125,10 @@
   margin: 0 20px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgb(110, 110, 110) 0px 4px 4px;
+  border-width: 1px;
+  border: none;
+  cursor: pointer;
 }
 
 .dash-button {
@@ -137,7 +140,10 @@
   margin: 15px 20px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgb(110, 110, 110) 0px 4px 4px;
+  border-width: 1px;
+  border: none;
+  cursor: pointer;
 }
 
 .button-text {
@@ -168,7 +174,11 @@
   margin: 15px 20px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgb(110, 110, 110) 0px 4px 4px;
+  border-width: 1px;
+  border: none;
+  cursor: pointer;
+  
 }
 
 .green-button {
@@ -243,6 +253,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  border: none;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   cursor: pointer;
 }
@@ -318,6 +329,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  border: none;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   cursor: pointer;
 }
@@ -397,6 +409,7 @@
   border-radius: 10px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   cursor: pointer;
+  border: none;
 }
 
 .rv-buttonText {
@@ -499,6 +512,7 @@ select.rd-input:focus option {
   border-radius: 10px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24);
   cursor: pointer;
+  border: none;
 }
 
 .rd-buttonText {

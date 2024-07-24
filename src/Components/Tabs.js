@@ -1,6 +1,3 @@
-
-// Filename  - Tabs.js
- 
 import React, { useState } from "react";
 import Tab from "./Tab";
 import "../App.css";

@@ -8,20 +8,18 @@ const AddDriver = () => {
 
   const handleAddDriver = async () => {
     try {
-      
-
       // Check if required fields are empty
       if (!driverName || !pincode ) {
         setErrorMessage('Please fill out all required fields');
         return;
       }
-      setErrorMessage('');
-      setLoading(true);
+      setErrorMessage(''); // Clear any previous error message
+      setLoading(true); // Set loading state to true
 
       console.log('Sending request to add a user.');
 
       // Send data to server
-      const response = await fetch('https://92.205.234.119:3000/addDriver', {
+      const response = await fetch('https://service-team.co.uk:8443/addDriver', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,6 +50,7 @@ const AddDriver = () => {
     }
   };
 
+  // Function to handle pincode input change and sanitize it
   const handlePincodeChange = (e) => {
     // Regex to replace any non-numeric characters with an empty string
     const sanitizedPincode = e.target.value.replace(/[^0-9]/g, '');
@@ -68,7 +67,7 @@ const AddDriver = () => {
             placeholder="User's Name *"
             value={driverName}
             onChange={(e) => setDriverName(e.target.value)}
-            disabled={loading}
+            disabled={loading} // Disable input if loading
             required
           />
         </div>

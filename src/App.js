@@ -12,11 +12,11 @@ import AdminView from './Pages/AdminView';
 import Start from './Pages/Start';
 import End from './Pages/End';
 
-
+// PrivateRoute component to protect routes that require authentication
 const PrivateRoute = ({ element, ...rest }) => {
   const { user } = useUser();
 
-  return user ? element : <Navigate to="/" />;
+  return user ? element : <Navigate to="/" />; // Redirect to EnterPin if not authenticated
 };
 
 

@@ -3,7 +3,7 @@ import { useNavigate,} from 'react-router-dom';
 import { useUser } from '../Components/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import '../App.css'; // Assuming you have a CSS file for styling
+import '../App.css'; 
 const icon = require('../Assets/Images/confirm.png')
 
 const Start = () => {
@@ -16,17 +16,18 @@ const Start = () => {
   const [message, setMessage] = useState('');
   const { user } = useUser();
 
-  console.log('user: ',user);
+  console.log('user: ',user); // Log user data for debugging
 
   // Function to fetch vehicle data from the server
   const fetchVehicles = async () => {
     
 
     try {
-      const response = await fetch('https://92.205.234.119:3000/vehicles');
-      const data = await response.json();
-      console.log('Fetched vehicle data:', data);
+      const response = await fetch('https://service-team.co.uk:8443/vehicles'); // Fetch vehicle data from server
+      const data = await response.json();// Parse response as JSON
+      console.log('Fetched vehicle data:', data); // Log fetched data
 
+      // Sort vehicles by make and update state
       const sortedVehicles = data.sort((a, b) => a.VEHICLE_MAKE.localeCompare(b.VEHICLE_MAKE));
       setVehicles(sortedVehicles);
     } catch (error) {
@@ -34,22 +35,26 @@ const Start = () => {
     }
   };
 
+  // useEffect to fetch vehicle data when component mounts
   useEffect(() => {
     fetchVehicles();
   }, []);
 
+  // Function to handle the start of the journey
   const handleStartJourney = () => {
-    if (!selectedVehicle) {
+    if (!selectedVehicle) { // Check if a vehicle is selected
       console.error('No vehicle selected');
       setMessage('No vehicle selected');
       return;
     }
 
+    // Get and format current date and time
     const currentDate = new Date();
     const formattedDate = `${currentDate.getFullYear()}/${String(currentDate.getMonth() + 1).padStart(2, '0')}/${String(currentDate.getDate()).padStart(2, '0')}`;
     const formattedTime = `${String(currentDate.getHours()).padStart(2, '0')}:${String(currentDate.getMinutes()).padStart(2, '0')}:${String(currentDate.getSeconds()).padStart(2, '0')}`;
     setFormattedTime(formattedTime);
 
+     // Create journey data object
     const journeyData = {
       date: formattedDate,
       start_time: formattedTime,
@@ -57,7 +62,8 @@ const Start = () => {
       driver_name: user.token
     };
 
-    fetch('https://92.205.234.119:3000/startjourney', {
+    // Send journey data to server
+    fetch('https://service-team.co.uk:8443/startjourney', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -66,9 +72,9 @@ const Start = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Journey started:', data);
-        setJourneyStarted(true);
-        setIsIconRotated(true);
+        console.log('Journey started:', data); // Log server response
+        setJourneyStarted(true); // Update journey started state
+        setIsIconRotated(true); // Trigger icon rotation
       })
       .catch(error => {
         setMessage('Error on Start, Please Try Again.');
@@ -82,7 +88,7 @@ const Start = () => {
 
   return (
     <div className="s-container">
-      {!journeyStarted ? (
+      {!journeyStarted ? ( // Conditional rendering based on journeyStarted state
         <div className="s-content">
           <div className="s-scrollview">
             {vehicles.map((vehicle, index) => (
@@ -102,7 +108,7 @@ const Start = () => {
             <div className="s-message">{message}</div>
           </div>
         </div>
-      ) : (
+      ) : ( // If journey started, display confirmation message
         <div className="journeystartedcontainer">
           <div className="s-text bold large">{`Thank you, ${user.token}`}</div>
           <img src={icon} alt="Confirmation" className={`s-icon ${isIconRotated ? 'rotate-animation' : ''}`} />

@@ -6,8 +6,8 @@ import { faUndo, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import '../App.css'; // Make sure this path is correct
 import logo from '../Assets/Images/logo.jpg';
 
-const dialPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, "clear", 0, "del"];
-const pinLength = 5;
+const dialPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, "clear", 0, "del"]; // Dial pad buttons
+const pinLength = 5; // Length of the PIN code
 
 const EnterPin = () => {
   const [pinCode, setPinCode] = useState("");
@@ -15,6 +15,7 @@ const EnterPin = () => {
   const navigate = useNavigate();
   const {user, loginUser} = useUser();
 
+  // Effect to redirect to dashboard if already logged in
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
     if (authToken) {
@@ -23,14 +24,15 @@ const EnterPin = () => {
     }
   }, [navigate]);
 
-  
+  // Function to clear the PIN code
   const clearPinCode = useCallback(() => {
     setPinCode("");
   }, []);
 
+  // Function to sign in using the entered PIN code
   const signIn = useCallback(() => {
     const enteredPin = pinCode;
-    fetch('https://92.205.234.119:3000/validate-pin', {
+    fetch('https://service-team.co.uk:8443/validate-pin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +51,7 @@ const EnterPin = () => {
       console.log("Response data:", data);
       if (data.isValid) {
         localStorage.setItem('authToken', 'true'); //persist login status
-        loginUser(data.driverName); // Assuming data.driverName is what you want to set
+        loginUser(data.driverName); // Log in user with driver name
         alert("Successfully logged in!");
         navigate('/dashboard');
       } else {
@@ -63,24 +65,26 @@ const EnterPin = () => {
       setPinCode("");
     })
     .finally(() => {
-      setIsSubmitting(false);
+      setIsSubmitting(false);// Reset submission status
     });
   }, [pinCode, loginUser, navigate]);
 
+  // Effect to trigger sign-in when PIN code reaches required length
   useEffect(() => {
     if (pinCode.length === pinLength && !isSubmitting) {
       setIsSubmitting(true);
-      signIn();
+      signIn(); // Call sign-in function
     }
   }, [pinCode, signIn, isSubmitting]);
 
+   // Function to handle dial pad button clicks
   const handleButtonClick = useCallback((item) => {
     if (item === "clear") {
-      setPinCode("");
+      setPinCode(""); // Clear the PIN code
     } else if (item === "del") {
-      setPinCode(prevCode => prevCode.slice(0, -1));
+      setPinCode(prevCode => prevCode.slice(0, -1)); // Delete the last character
     } else if (typeof item === "number") {
-      setPinCode(prevCode => prevCode + item);
+      setPinCode(prevCode => prevCode + item); // Append the clicked number to the PIN code
     }
   }, []);
 
