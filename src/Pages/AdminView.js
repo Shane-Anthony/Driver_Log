@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate,} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Tabs from "../Components/Tabs";
 import '../App.css';
 
 // DailyJourneys Component
 const DailyJourneys = () => {
+  
   const [dailyJourneys, setDailyJourneys] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   
@@ -207,6 +209,11 @@ const WeeklyJourneys = () => {
 
 // AdminView Component
 const AdminView = () => {
+  const navigate = useNavigate();
+
+  const handleReturnToDashboard = () => {
+    navigate('/dashboard');
+  };
   
   // Function to render content based on active tab
   const renderContent = (activeTab) => {
@@ -224,9 +231,15 @@ const AdminView = () => {
     }
   };
 
+  //Render the full page with both weekly and daily inside
   return (
-    <div className="AdminView">    
-      <Tabs tabs={[{label: "Daily"}, {label: "Weekly"}]} renderContent={renderContent} />
+    <div className='adView-container'>
+      <button className='admin-backButton' onClick={handleReturnToDashboard} style={{border: 'none', background: 'none', cursor:'pointer'}}>
+        <FontAwesomeIcon icon={faArrowLeftLong} size="2x" />
+      </button>
+      <div className="AdminView">    
+        <Tabs tabs={[{label: "Daily"}, {label: "Weekly"}]} renderContent={renderContent} />
+      </div>
     </div>
   );
 };

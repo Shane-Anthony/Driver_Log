@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate,} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong} from '@fortawesome/free-solid-svg-icons';
 
 const AddDriver = () => {
+  const navigate = useNavigate();
   const [driverName, setDriverName] = useState('');
   const [pincode, setPincode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -57,6 +61,10 @@ const AddDriver = () => {
     setPincode(sanitizedPincode);
   };
 
+  const handleReturnToDashboard = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className='ad-container'>
       <div className='ad-square'>
@@ -87,6 +95,9 @@ const AddDriver = () => {
         </button>
         {errorMessage && <p className='ad-errorMessage'>{errorMessage}</p>}
       </div>
+      <button className='backButton' onClick={handleReturnToDashboard}>
+        <FontAwesomeIcon icon={faArrowLeftLong} size="2x" />
+      </button>
     </div>
   );
 };

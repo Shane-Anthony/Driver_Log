@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate,} from 'react-router-dom';
 import { useUser } from '../Components/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowLeftLong} from '@fortawesome/free-solid-svg-icons';
 import '../App.css'; 
 const icon = require('../Assets/Images/confirm.png')
 
@@ -86,10 +86,17 @@ const Start = () => {
     navigate('/dashboard');
   };
 
+  
+
   return (
     <div className="s-container">
+      
       {!journeyStarted ? ( // Conditional rendering based on journeyStarted state
+      
         <div className="s-content">
+          <button onClick={handleReturnToDashboard} style={{ border: 'none', background: 'none', cursor: 'pointer', padding: '20px'}}>
+            <FontAwesomeIcon icon={faArrowLeftLong} size="2x" />
+          </button>
           <div className="s-scrollview">
             {vehicles.map((vehicle, index) => (
               <button

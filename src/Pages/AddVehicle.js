@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate,} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong} from '@fortawesome/free-solid-svg-icons';
 
 const AddVehicle = () => {
+  const navigate = useNavigate();
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   const [registration, setRegistration] = useState('');
@@ -71,6 +75,10 @@ const AddVehicle = () => {
     setRegistration(sanitizedText);
   };
 
+  const handleReturnToDashboard = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className='av-container'>
       <div className='av-square'>
@@ -107,6 +115,9 @@ const AddVehicle = () => {
         </button>
         {errorMessage && <p className='av-errorMessage'>{errorMessage}</p>}
       </div>
+      <button className='backButton' onClick={handleReturnToDashboard}>
+        <FontAwesomeIcon icon={faArrowLeftLong} size="2x" />
+      </button>
     </div>
   );
 

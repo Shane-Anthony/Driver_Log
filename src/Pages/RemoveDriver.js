@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate,} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong} from '@fortawesome/free-solid-svg-icons';
 
 const RemoveDriver = () => {
+  const navigate = useNavigate();
   const [drivers, setDrivers] = useState([]);
   const [selectedDriver, setSelectedDriver] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
 
-// Fetch the list of drivers when the component mounts
+  // Fetch the list of drivers when the component mounts
   const fetchDrivers = async () => {
     try {
       const response = await fetch('https://service-team.co.uk:8443/drivers');
@@ -53,6 +57,10 @@ const RemoveDriver = () => {
     }
   };
 
+  const handleReturnToDashboard = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className='rd-container'>
       <div className='rd-square'>
@@ -77,6 +85,9 @@ const RemoveDriver = () => {
         </button>
         {errorMessage && <p className='rd-errorMessage'>{errorMessage}</p>}
       </div>
+      <button className='backButton' onClick={handleReturnToDashboard}>
+        <FontAwesomeIcon icon={faArrowLeftLong} size="2x" />
+      </button>
     </div>
   );
 };

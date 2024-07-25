@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate,} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong} from '@fortawesome/free-solid-svg-icons';
 
 const RemoveVehicle = () => {
+  const navigate = useNavigate();
   const [registration, setRegistration] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -47,6 +51,10 @@ const RemoveVehicle = () => {
     setRegistration(e.target.value);
   };
 
+  const handleReturnToDashboard = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className='rv-container'>
       <div className='rv-square'>
@@ -65,6 +73,9 @@ const RemoveVehicle = () => {
         </button>
         {errorMessage && <p className='rv-errorMessage'>{errorMessage}</p>}
       </div>
+      <button className='backButton' onClick={handleReturnToDashboard}>
+        <FontAwesomeIcon icon={faArrowLeftLong} size="2x" />
+      </button>
     </div>
   );
 };

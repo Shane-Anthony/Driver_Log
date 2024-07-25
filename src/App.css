@@ -200,6 +200,7 @@
 /*Add Driver styles*/
 
 .ad-container {
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -277,6 +278,7 @@
 
 .av-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -349,10 +351,18 @@
   left: 0; 
 }
 
+.backButton {
+  margin-top: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 20px;
+}
+
 /*Remove Vehicle styles*/
 
 .rv-container {
-  
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -430,7 +440,7 @@
 /*Remove Driver styles*/
 
 .rd-container {
-  
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -531,6 +541,15 @@ select.rd-input:focus option {
 }
 
 /* Admin View */
+
+.adView-container {
+  padding-top: 15px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
 
 .tabs-container {
   flex: 1;
@@ -655,7 +674,7 @@ td {
   align-items: center;
   width: 100%;
   overflow-y: auto;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 .s-scrollview {
