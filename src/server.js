@@ -19,7 +19,7 @@ const db = mysql.createConnection({
   host: '119.234.205.92.host.secureserver.net',
   port: 3306,
   user: 'puregarden_appmin',
-  password: 'Pc911Add3!',
+  password: 'hidden',
   database: 'puregarden_app'
 });
 
